@@ -1,0 +1,36 @@
+# Compressed archives
+*.zip
+*.tar.gz
+*.7z
+
+# Python
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+
+# System files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Email script (may contain credentials)
+send_windows_setup.py
+
+# Local configuration
+*.local
+.env
