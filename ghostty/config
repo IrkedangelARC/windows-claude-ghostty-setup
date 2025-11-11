@@ -1,0 +1,80 @@
+# ----------------------------------------------------------------------------
+# Ghostty Terminal Configuration for Windows 11
+# ----------------------------------------------------------------------------
+# Installation location: %APPDATA%\ghostty\config
+# (Typically: C:\Users\<YourUsername>\AppData\Roaming\ghostty\config)
+# ----------------------------------------------------------------------------
+
+# ----------------------------------------------------------------------------
+# Theme & Visual Appearance
+# ----------------------------------------------------------------------------
+theme = "Catppuccin Mocha"
+background-opacity = 0.95
+background-blur-radius = 20
+unfocused-split-opacity = 0.7
+
+# ----------------------------------------------------------------------------
+# Font Configuration
+# ----------------------------------------------------------------------------
+# Note: Ensure JetBrains Mono is installed on Windows
+# Download from: https://www.jetbrains.com/lp/mono/
+font-family = "JetBrains Mono"
+font-size = 19
+font-thicken = true
+adjust-cell-height = 10%
+
+# ----------------------------------------------------------------------------
+# Window & Mouse
+# ----------------------------------------------------------------------------
+mouse-hide-while-typing = true
+window-decoration = true
+
+# Visual/UX tweaks
+window-padding-x = 6
+window-padding-y = 4
+
+# ----------------------------------------------------------------------------
+# Selection & Clipboard Enhancements
+# ----------------------------------------------------------------------------
+# Bright, prominent selection colors (Catppuccin mauve - sophisticated purple)
+selection-background = #cba6f7
+selection-foreground = #1e1e2e
+
+# Clipboard features
+# Auto-copy to clipboard on selection
+copy-on-select = true
+# Clean up whitespace when copying
+clipboard-trim-trailing-spaces = true
+
+# OSC 52 clipboard integration (for clipboard sharing across tools)
+clipboard-read = allow
+clipboard-write = allow
+
+# ----------------------------------------------------------------------------
+# Cursor Configuration (Catppuccin Mocha colors)
+# ----------------------------------------------------------------------------
+cursor-style = block
+cursor-style-blink = true
+cursor-invert-fg-bg = true
+cursor-color = #89b4fa
+cursor-text = #1e1e2e
+
+# ----------------------------------------------------------------------------
+# Shell Configuration for Windows
+# ----------------------------------------------------------------------------
+# Default to PowerShell on Windows
+# You can change this to cmd.exe or other shells as needed
+# command = powershell.exe
+
+# Alternative: Windows Terminal with PowerShell
+# command = wt.exe powershell.exe
+
+# For WSL:
+# command = wsl.exe
+
+# ----------------------------------------------------------------------------
+# Keybindings
+# ----------------------------------------------------------------------------
+keybind = shift+enter=text:\x1b\r
+# Note: Global keybinds may differ on Windows
+# keybind = global:cmd+/=toggle_quick_terminal
