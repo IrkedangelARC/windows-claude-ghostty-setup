@@ -1,6 +1,6 @@
-# Windows 11 Setup - Ghostty Terminal & Claude Code
+# Windows 11 Setup - Windows Terminal & Claude Code
 
-This package contains all configuration files needed to replicate your macOS Ghostty and Claude Code setup on Windows 11.
+This package contains all configuration files needed to replicate your macOS terminal and Claude Code setup on Windows 11 using **Windows Terminal** with the Catppuccin Mocha theme.
 
 ## Prerequisites
 
@@ -11,13 +11,13 @@ Before starting, ensure you have:
 
 ---
 
-## Part 1: Install Ghostty Terminal
+## Part 1: Configure Windows Terminal
 
-### Step 1: Install Ghostty
-1. Visit the Ghostty releases page: https://github.com/ghostty-org/ghostty/releases
-2. Download the latest Windows installer (`.exe` or `.msi`)
-3. Run the installer with administrator privileges
-4. Follow the installation wizard
+### Step 1: Verify Windows Terminal is Installed
+Windows Terminal comes pre-installed on Windows 11. Verify by searching for "Windows Terminal" in the Start menu.
+
+If not installed, download from Microsoft Store:
+https://www.microsoft.com/store/productId/9N0DX20HK701
 
 ### Step 2: Install JetBrains Mono Font
 The config uses JetBrains Mono font. Install it:
@@ -26,18 +26,15 @@ The config uses JetBrains Mono font. Install it:
 3. Open the `fonts/ttf` folder
 4. Select all `.ttf` files, right-click, and choose "Install for all users"
 
-### Step 3: Configure Ghostty
-1. Create the Ghostty config directory:
+### Step 3: Configure Windows Terminal
+1. Copy the settings file:
    ```powershell
-   New-Item -ItemType Directory -Force -Path "$env:APPDATA\ghostty"
+   Copy-Item ".\windows-terminal\settings.json" "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json" -Force
    ```
 
-2. Copy the config file:
-   ```powershell
-   Copy-Item ".\ghostty\config" "$env:APPDATA\ghostty\config"
-   ```
+2. Launch Windows Terminal - it should now use the Catppuccin Mocha theme!
 
-3. Launch Ghostty - it should now use your custom configuration!
+**Note:** This will replace your existing Windows Terminal settings. If you have custom configurations, back them up first.
 
 ---
 
@@ -106,14 +103,15 @@ You should see:
 
 ## Part 4: First Run & Testing
 
-### Test Ghostty
-1. Launch Ghostty
-2. Verify the theme (Catppuccin Mocha) is applied
-3. Check that font rendering looks correct
-4. Test clipboard features (select text - it should auto-copy)
+### Test Windows Terminal
+1. Launch Windows Terminal
+2. Verify the Catppuccin Mocha theme is applied (dark background, purple/blue accents)
+3. Check that JetBrains Mono font rendering looks correct
+4. Test transparency (background should be slightly transparent)
+5. Select text - it should highlight with purple color
 
 ### Test Claude Code
-1. Open Ghostty terminal
+1. Open Windows Terminal
 2. Navigate to your projects directory:
    ```powershell
    cd $env:USERPROFILE\Projects
@@ -134,7 +132,7 @@ After setup, these specialized agents will be available:
 1. **session-documenter** - Creates comprehensive session documentation
 2. **gmail-assistant** - Helps with Gmail operations and email management
 3. **av-integration-engineer** - Technical AV programming and API integration
-4. **ghostty-config-specialist** - Configures Ghostty terminal settings
+4. **ghostty-config-specialist** - Configures terminal settings (works for Windows Terminal too!)
 5. **gworkspace-python-dev** - Google Workspace API development
 6. **arcninja** - Project-specific automation and workflows
 
@@ -142,17 +140,47 @@ After setup, these specialized agents will be available:
 
 ## Quick Setup Script
 
+### IMPORTANT: Navigate to Folder and Enable Scripts First
+
+1. **Open PowerShell as Administrator**
+   - Search for "PowerShell" in Start menu
+   - Right-click "Windows PowerShell"
+   - Select "Run as Administrator"
+
+2. **Navigate to the setup folder:**
+   ```powershell
+   # If you extracted to Downloads:
+   cd "$env:USERPROFILE\Downloads\windows-claude-ghostty-setup"
+
+   # Or if on USB drive (change D: to your drive letter):
+   cd "D:\windows-claude-ghostty-setup"
+
+   # Verify you're in the right place:
+   Get-ChildItem  # Should show setup.ps1 and other files
+   ```
+
+3. **Enable script execution (only needed once):**
+   ```powershell
+   Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+   ```
+
+4. **Run the setup script:**
+   ```powershell
+   .\setup.ps1
+   ```
+
+### Script Contents
+
 For convenience, here's a PowerShell script that does everything:
 
 ```powershell
 # Run this in Administrator PowerShell
 
 # Create directories
-New-Item -ItemType Directory -Force -Path "$env:APPDATA\ghostty"
 New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.claude\agents"
 
-# Copy Ghostty config
-Copy-Item ".\ghostty\config" "$env:APPDATA\ghostty\config"
+# Copy Windows Terminal settings
+Copy-Item ".\windows-terminal\settings.json" "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json" -Force
 
 # Copy Claude settings
 Copy-Item ".\claude\settings\settings.local.json" "$env:USERPROFILE\.claude\settings.local.json"
@@ -163,10 +191,10 @@ Copy-Item ".\claude\agents\*.md" "$env:USERPROFILE\.claude\agents\"
 Write-Host "✓ Configuration files copied successfully!" -ForegroundColor Green
 Write-Host ""
 Write-Host "Next steps:" -ForegroundColor Yellow
-Write-Host "1. Install Ghostty from: https://github.com/ghostty-org/ghostty/releases"
-Write-Host "2. Install JetBrains Mono font from: https://www.jetbrains.com/lp/mono/"
-Write-Host "3. Install Claude Code: npm install -g @anthropic-ai/claude-code"
-Write-Host "4. Authenticate: claude auth login"
+Write-Host "1. Install JetBrains Mono font from: https://www.jetbrains.com/lp/mono/"
+Write-Host "2. Install Claude Code: npm install -g @anthropic-ai/claude-code"
+Write-Host "3. Authenticate: claude auth login"
+Write-Host "4. Restart Windows Terminal to see the new theme"
 ```
 
 Save this as `setup.ps1` and run it!
@@ -175,16 +203,20 @@ Save this as `setup.ps1` and run it!
 
 ## Troubleshooting
 
-### Ghostty Issues
+### Windows Terminal Issues
+
+**Problem:** Settings not applying
+- **Solution:** Make sure Windows Terminal is completely closed (check Task Manager), then relaunch
 
 **Problem:** Font not rendering correctly
-- **Solution:** Ensure JetBrains Mono is installed for all users
-
-**Problem:** Config not loading
-- **Solution:** Verify config file location: `%APPDATA%\ghostty\config`
+- **Solution:** Ensure JetBrains Mono is installed for all users and restart Windows Terminal
 
 **Problem:** Theme colors wrong
-- **Solution:** Check that Catppuccin Mocha theme is supported in your Ghostty version
+- **Solution:** Verify settings.json was copied to the correct location:
+  `%LOCALAPPDATA%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json`
+
+**Problem:** Transparency not working
+- **Solution:** Acrylic effects require Windows 11. On Windows 10, set `"useAcrylic": false` in settings.json
 
 ### Claude Code Issues
 
@@ -204,8 +236,8 @@ Save this as `setup.ps1` and run it!
 After setup, your files should be organized as:
 
 ```
-%APPDATA%\ghostty\
-└── config                          # Ghostty terminal configuration
+%LOCALAPPDATA%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\
+└── settings.json                   # Windows Terminal configuration
 
 %USERPROFILE%\.claude\
 ├── settings.local.json             # Claude Code permissions
@@ -222,41 +254,43 @@ After setup, your files should be organized as:
 
 ## Customization Tips
 
-### Adjust for Windows Specifics
+### Adjust for Your Preferences
 
-1. **Shell Integration**: Edit Ghostty config to use your preferred shell:
-   ```
-   command = powershell.exe
-   # or
-   command = wsl.exe  # for WSL
-   ```
-
-2. **Font Size**: Adjust based on your display:
-   ```
-   font-size = 19  # Increase/decrease as needed
+1. **Font Size**: Edit Windows Terminal settings.json:
+   ```json
+   "font": {
+     "face": "JetBrains Mono",
+     "size": 14  // Adjust as needed
+   }
    ```
 
-3. **Opacity**: Change background transparency:
+2. **Opacity**: Change background transparency:
+   ```json
+   "opacity": 90,  // 0-100, where 100 is opaque
+   "acrylicOpacity": 0.90
    ```
-   background-opacity = 0.95  # 0.0 (transparent) to 1.0 (opaque)
-   ```
+
+3. **Different Shell**: Change default profile to use WSL, cmd, or PowerShell 7
+
+4. **Keybindings**: Customize shortcuts in the "actions" section of settings.json
 
 ---
 
 ## Support & Resources
 
-- **Ghostty Documentation**: https://ghostty.org/docs
+- **Windows Terminal Documentation**: https://docs.microsoft.com/windows/terminal/
 - **Claude Code Documentation**: https://docs.claude.com/claude-code
 - **JetBrains Mono Font**: https://www.jetbrains.com/lp/mono/
-- **Catppuccin Theme**: https://github.com/catppuccin/catppuccin
+- **Catppuccin Theme**: https://github.com/catppuccin/windows-terminal
 
 ---
 
 ## Notes
 
-- This setup replicates your macOS configuration as closely as possible
-- Some features (like tmux auto-start) are macOS-specific and have been adjusted for Windows
-- The custom agents are cross-platform and should work identically on Windows
+- This setup uses Windows Terminal instead of Ghostty (which doesn't have a Windows version)
+- Windows Terminal is pre-installed on Windows 11 - no separate download needed!
+- The Catppuccin Mocha theme provides the same beautiful dark theme as Ghostty
+- All custom agents are cross-platform and work identically on Windows
 - Make sure to run PowerShell as Administrator for initial setup
 
 Enjoy your Windows setup! 🚀

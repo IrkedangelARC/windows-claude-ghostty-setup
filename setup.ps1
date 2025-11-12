@@ -1,11 +1,11 @@
 # ============================================================================
-# Windows 11 - Ghostty & Claude Code Setup Script
+# Windows 11 - Windows Terminal & Claude Code Setup Script
 # ============================================================================
 # Run this script in PowerShell with Administrator privileges
 # ============================================================================
 
 Write-Host "================================================" -ForegroundColor Cyan
-Write-Host "  Ghostty & Claude Code Configuration Setup    " -ForegroundColor Cyan
+Write-Host "  Windows Terminal & Claude Code Setup         " -ForegroundColor Cyan
 Write-Host "================================================" -ForegroundColor Cyan
 Write-Host ""
 
@@ -33,11 +33,6 @@ if (-not (Test-Administrator)) {
 Write-Host "[1/4] Creating directory structure..." -ForegroundColor Green
 
 try {
-    # Ghostty config directory
-    $ghosttyPath = "$env:APPDATA\ghostty"
-    New-Item -ItemType Directory -Force -Path $ghosttyPath | Out-Null
-    Write-Host "  ✓ Created: $ghosttyPath" -ForegroundColor Gray
-
     # Claude config directories
     $claudePath = "$env:USERPROFILE\.claude"
     $claudeAgentsPath = "$claudePath\agents"
@@ -53,22 +48,40 @@ try {
 }
 
 # ============================================================================
-# Step 2: Copy Ghostty Configuration
+# Step 2: Copy Windows Terminal Configuration
 # ============================================================================
 
-Write-Host "[2/4] Copying Ghostty configuration..." -ForegroundColor Green
+Write-Host "[2/4] Copying Windows Terminal configuration..." -ForegroundColor Green
 
 try {
-    $ghosttyConfig = ".\ghostty\config"
-    if (Test-Path $ghosttyConfig) {
-        Copy-Item $ghosttyConfig "$env:APPDATA\ghostty\config" -Force
-        Write-Host "  ✓ Ghostty config copied successfully" -ForegroundColor Gray
+    $wtSettingsSource = ".\windows-terminal\settings.json"
+    $wtSettingsDest = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
+
+    if (Test-Path $wtSettingsSource) {
+        # Check if Windows Terminal is installed
+        $wtPackagePath = "$env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe"
+
+        if (Test-Path $wtPackagePath) {
+            # Backup existing settings if they exist
+            if (Test-Path $wtSettingsDest) {
+                $backupPath = "$wtSettingsDest.backup-$(Get-Date -Format 'yyyyMMdd-HHmmss')"
+                Copy-Item $wtSettingsDest $backupPath -Force
+                Write-Host "  ✓ Backed up existing settings to: $(Split-Path $backupPath -Leaf)" -ForegroundColor Gray
+            }
+
+            Copy-Item $wtSettingsSource $wtSettingsDest -Force
+            Write-Host "  ✓ Windows Terminal config copied successfully" -ForegroundColor Gray
+            Write-Host "    Close and reopen Windows Terminal to see the changes" -ForegroundColor Yellow
+        } else {
+            Write-Host "  ⚠ Windows Terminal not found" -ForegroundColor Yellow
+            Write-Host "    Install from Microsoft Store: https://aka.ms/terminal" -ForegroundColor Yellow
+        }
     } else {
-        Write-Host "  ⚠ Ghostty config not found at: $ghosttyConfig" -ForegroundColor Yellow
+        Write-Host "  ⚠ Windows Terminal config not found at: $wtSettingsSource" -ForegroundColor Yellow
     }
     Write-Host ""
 } catch {
-    Write-Host "  ✗ Error copying Ghostty config: $_" -ForegroundColor Red
+    Write-Host "  ✗ Error copying Windows Terminal config: $_" -ForegroundColor Red
 }
 
 # ============================================================================
@@ -128,27 +141,28 @@ Write-Host "================================================" -ForegroundColor C
 Write-Host ""
 
 Write-Host "Configuration files have been copied to:" -ForegroundColor Green
-Write-Host "  • Ghostty: $env:APPDATA\ghostty\config" -ForegroundColor White
+Write-Host "  • Windows Terminal: $env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json" -ForegroundColor White
 Write-Host "  • Claude:  $env:USERPROFILE\.claude\" -ForegroundColor White
 Write-Host ""
 
 Write-Host "Next Steps:" -ForegroundColor Yellow
 Write-Host ""
-Write-Host "1. Install Ghostty Terminal" -ForegroundColor White
-Write-Host "   Download from: https://github.com/ghostty-org/ghostty/releases" -ForegroundColor Gray
-Write-Host ""
-Write-Host "2. Install JetBrains Mono Font" -ForegroundColor White
+Write-Host "1. Install JetBrains Mono Font" -ForegroundColor White
 Write-Host "   Download from: https://www.jetbrains.com/lp/mono/" -ForegroundColor Gray
 Write-Host "   Right-click all .ttf files → Install for all users" -ForegroundColor Gray
 Write-Host ""
-Write-Host "3. Install Claude Code CLI" -ForegroundColor White
+Write-Host "2. Install Claude Code CLI" -ForegroundColor White
 Write-Host "   Run: npm install -g @anthropic-ai/claude-code" -ForegroundColor Gray
 Write-Host "   (Requires Node.js: https://nodejs.org/)" -ForegroundColor Gray
 Write-Host ""
-Write-Host "4. Authenticate Claude Code" -ForegroundColor White
+Write-Host "3. Authenticate Claude Code" -ForegroundColor White
 Write-Host "   Run: claude auth login" -ForegroundColor Gray
 Write-Host ""
-Write-Host "5. Launch Ghostty and run: claude" -ForegroundColor White
+Write-Host "4. Restart Windows Terminal" -ForegroundColor White
+Write-Host "   Close all Windows Terminal windows and reopen to see the new theme" -ForegroundColor Gray
+Write-Host ""
+Write-Host "5. Launch Claude Code" -ForegroundColor White
+Write-Host "   Open Windows Terminal and run: claude" -ForegroundColor Gray
 Write-Host ""
 
 Write-Host "================================================" -ForegroundColor Cyan

@@ -1,6 +1,6 @@
 # Package Contents
 
-This package contains everything needed to replicate your macOS Ghostty + Claude Code setup on Windows 11.
+This package contains everything needed to replicate your macOS terminal + Claude Code setup on Windows 11 using Windows Terminal.
 
 ## File Structure
 
@@ -13,9 +13,9 @@ windows-claude-ghostty-setup/
 ├── CLAUDE_INITIALIZATION_PROMPT.md        # First-run prompt for Claude Code
 ├── setup.ps1                              # Automated PowerShell setup script
 │
-├── ghostty/
-│   └── config                             # Ghostty terminal configuration
-│                                          # Target: %APPDATA%\ghostty\config
+├── windows-terminal/
+│   └── settings.json                      # Windows Terminal configuration
+│                                          # Target: %LOCALAPPDATA%\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json
 │
 └── claude/
     ├── settings/
@@ -35,13 +35,13 @@ windows-claude-ghostty-setup/
 
 ### Configuration Files
 
-#### Ghostty Config (`ghostty/config`)
+#### Windows Terminal Config (`windows-terminal/settings.json`)
 - **Theme:** Catppuccin Mocha (dark theme with purple accents)
-- **Font:** JetBrains Mono, size 19, with thickening
-- **Visual:** 95% opacity, 20px blur, enhanced selection colors
+- **Font:** JetBrains Mono, size 12
+- **Visual:** 95% opacity, acrylic blur, enhanced selection colors
 - **Features:** Auto-copy on select, clipboard integration (OSC 52)
 - **Cursor:** Blinking block style in Catppuccin blue
-- **Adapted for Windows:** PowerShell shell configuration
+- **Adapted for Windows:** Native Windows Terminal JSON configuration format
 
 #### Claude Settings (`claude/settings/settings.local.json`)
 - **Pre-approved permissions:**
@@ -101,14 +101,14 @@ Use `QUICK_START.md` for a condensed 5-minute setup guide.
 
 These need to be installed separately (links provided in README.md):
 
-1. **Ghostty Terminal** - The terminal emulator
-2. **JetBrains Mono Font** - Required by the Ghostty config
+1. **Windows Terminal** - Pre-installed on Windows 11 (or get from Microsoft Store)
+2. **JetBrains Mono Font** - Required by the Windows Terminal config
 3. **Node.js** - Required for Claude Code CLI
 4. **Claude Code CLI** - The main tool (`npm install -g @anthropic-ai/claude-code`)
 
 ## After Installation
 
-1. Launch Ghostty - should display with Catppuccin Mocha theme
+1. Launch Windows Terminal - should display with Catppuccin Mocha theme
 2. Run `claude` in terminal
 3. Use the prompt from `CLAUDE_INITIALIZATION_PROMPT.md` for first interaction
 4. Test custom agents with relevant queries

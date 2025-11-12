@@ -1,0 +1,112 @@
+{
+  "$help": "https://aka.ms/terminal-documentation",
+  "$schema": "https://aka.ms/terminal-profiles-schema",
+
+  "// CATPPUCCIN MOCHA THEME FOR WINDOWS TERMINAL": "Installation: Copy this entire file to %LOCALAPPDATA%\\Packages\\Microsoft.WindowsTerminal_8wekyb3d8bbwe\\LocalState\\settings.json",
+
+  "defaultProfile": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+
+  "profiles": {
+    "defaults": {
+      "font": {
+        "face": "JetBrains Mono",
+        "size": 12
+      },
+      "colorScheme": "Catppuccin Mocha",
+      "opacity": 95,
+      "useAcrylic": true,
+      "acrylicOpacity": 0.95,
+      "backgroundImage": null,
+      "backgroundImageOpacity": 0.95,
+      "cursorShape": "block",
+      "cursorColor": "#89B4FA",
+      "selectionBackground": "#CBA6F7"
+    },
+    "list": [
+      {
+        "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
+        "name": "Windows PowerShell",
+        "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+        "hidden": false,
+        "colorScheme": "Catppuccin Mocha"
+      },
+      {
+        "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
+        "name": "Command Prompt",
+        "commandline": "%SystemRoot%\\System32\\cmd.exe",
+        "hidden": false,
+        "colorScheme": "Catppuccin Mocha"
+      }
+    ]
+  },
+
+  "schemes": [
+    {
+      "name": "Catppuccin Mocha",
+      "background": "#1E1E2E",
+      "foreground": "#CDD6F4",
+      "cursorColor": "#F5E0DC",
+      "selectionBackground": "#585B70",
+      "black": "#45475A",
+      "red": "#F38BA8",
+      "green": "#A6E3A1",
+      "yellow": "#F9E2AF",
+      "blue": "#89B4FA",
+      "purple": "#F5C2E7",
+      "cyan": "#94E2D5",
+      "white": "#BAC2DE",
+      "brightBlack": "#585B70",
+      "brightRed": "#F38BA8",
+      "brightGreen": "#A6E3A1",
+      "brightYellow": "#F9E2AF",
+      "brightBlue": "#89B4FA",
+      "brightPurple": "#F5C2E7",
+      "brightCyan": "#94E2D5",
+      "brightWhite": "#A6ADC8"
+    }
+  ],
+
+  "themes": [
+    {
+      "name": "Catppuccin Mocha",
+      "tab": {
+        "background": "#1E1E2EFF",
+        "showCloseButton": "always",
+        "unfocusedBackground": null
+      },
+      "tabRow": {
+        "background": "#181825FF",
+        "unfocusedBackground": "#11111BFF"
+      },
+      "window": {
+        "applicationTheme": "dark",
+        "useMica": true
+      }
+    }
+  ],
+
+  "theme": "Catppuccin Mocha",
+
+  "actions": [
+    { "command": "copy", "keys": "ctrl+c" },
+    { "command": "paste", "keys": "ctrl+v" },
+    { "command": "find", "keys": "ctrl+f" },
+    { "command": { "action": "splitPane", "split": "auto", "splitMode": "duplicate" }, "keys": "alt+shift+d" },
+    { "command": "closePane", "keys": "ctrl+shift+w" }
+  ],
+
+  "copyOnSelect": true,
+  "copyFormatting": "none",
+  "trimBlockSelection": true,
+  "trimPaste": true,
+
+  "// NOTES": [
+    "This configuration replicates the Ghostty Catppuccin Mocha setup for Windows Terminal",
+    "Font: JetBrains Mono (must be installed separately)",
+    "Opacity: 95% with acrylic blur effect",
+    "Theme: Catppuccin Mocha dark theme",
+    "Cursor: Block style with blue color (#89B4FA)",
+    "Selection: Purple highlight (#CBA6F7)",
+    "Copy on select: Enabled"
+  ]
+}

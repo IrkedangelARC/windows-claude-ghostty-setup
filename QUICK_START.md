@@ -9,28 +9,34 @@
 
 ### 5-Minute Setup
 
-1. **Run the setup script:**
+1. **Navigate to the setup folder and run:**
    ```powershell
+   # Navigate to the setup folder (adjust path as needed)
+   cd "C:\Users\YourUsername\Downloads\windows-claude-ghostty-setup"
+
+   # Or if on USB drive:
+   # cd "D:\windows-claude-ghostty-setup"
+
+   # Enable script execution (only needed once)
+   Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+
+   # Run the setup script
    .\setup.ps1
    ```
 
-2. **Install Ghostty:**
-   - Download: https://github.com/ghostty-org/ghostty/releases
-   - Run installer
-
-3. **Install JetBrains Mono Font:**
+2. **Install JetBrains Mono Font:**
    - Download: https://www.jetbrains.com/lp/mono/
    - Install all .ttf files (right-click → Install for all users)
 
-4. **Install Claude Code:**
+3. **Install Claude Code:**
    ```powershell
    npm install -g @anthropic-ai/claude-code
    claude auth login
    ```
 
-5. **Launch and Test:**
+4. **Launch and Test:**
    ```powershell
-   ghostty
+   # Close and reopen Windows Terminal
    claude
    ```
 
@@ -44,12 +50,14 @@ For first-time Claude Code usage, see [CLAUDE_INITIALIZATION_PROMPT.md](CLAUDE_I
 
 ## What You Get
 
-### Ghostty Terminal
+### Windows Terminal
 - Catppuccin Mocha theme (dark, beautiful)
 - JetBrains Mono font (coding-optimized)
-- Auto-copy on select
-- Semi-transparent background with blur
+- Semi-transparent background with acrylic blur
+- Copy-on-select clipboard integration
 - Optimized for productivity
+
+**Note:** Windows Terminal comes pre-installed on Windows 11!
 
 ### Claude Code
 - Pre-configured permissions (no constant prompts)
@@ -72,13 +80,22 @@ A: Run this first:
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 ```
 
-**Q: Ghostty config not applying**
+**Q: Windows Terminal theme not applying**
 
-A: Verify file location: `%APPDATA%\ghostty\config`
+A: Close Windows Terminal completely (check Task Manager), then reopen it
 
 **Q: Claude agents not found**
 
 A: Check: `%USERPROFILE%\.claude\agents\` contains .md files
+
+---
+
+## Important Notes
+
+- **Windows Terminal** is used instead of Ghostty (Ghostty doesn't have a Windows version)
+- Windows Terminal is already installed on Windows 11 - nothing to download!
+- The Catppuccin Mocha theme looks just as beautiful as the Ghostty version
+- All custom agents work identically on Windows
 
 ---
 

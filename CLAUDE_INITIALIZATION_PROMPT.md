@@ -45,11 +45,11 @@ I typically work in:
 - $env:USERPROFILE\Projects
 - $env:USERPROFILE\projects
 
-**Ghostty Terminal Configuration:**
+**Windows Terminal Configuration:**
 - Theme: Catppuccin Mocha
 - Font: JetBrains Mono
 - Auto-copy on select enabled
-- Background opacity: 0.95
+- Background opacity: 95% with acrylic blur
 
 **What I need from you:**
 - Use the custom agents when appropriate for specialized tasks
@@ -71,11 +71,11 @@ Hi Claude! New Windows 11 setup here. I have custom agents installed:
 - session-documenter (for end-of-session docs)
 - gmail-assistant (email management)
 - av-integration-engineer (AV systems programming)
-- ghostty-config-specialist (terminal config)
+- ghostty-config-specialist (terminal config - works with Windows Terminal too!)
 - gworkspace-python-dev (Google APIs)
 - arcninja (project automation)
 
-I work on AV/event production systems, use PowerShell, and prefer concise technical communication. Ready to work!
+I work on AV/event production systems, use Windows Terminal with PowerShell, and prefer concise technical communication. Ready to work!
 ```
 
 ---
@@ -149,7 +149,7 @@ I'm done for today. Can you use the session-documenter agent to create a summary
 
 ### Example 4: Terminal Customization
 ```
-I want to modify my Ghostty config to use a larger font size and different theme. Can you help?
+I want to modify my Windows Terminal config to use a larger font size. Can you help?
 ```
 
 ---
